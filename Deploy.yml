@@ -16,7 +16,7 @@
   - name: Configure NFS
     hosts: localhost
     vars:
-      NFS_Network: 0.0.0.0
+      NFS_Network: 10.118.0.0/24
     tasks:
       - name: Install NFS-Utils
         apt:
@@ -36,26 +36,26 @@
           state: restarted
           daemon_reload: yes
           enabled: yes
-## Configure Firewall (UFW)
-#  - name: Configure UFW
-#    hosts: localhost
-#    tasks:
-#      - name: Set Default Profiles
-#        shell: ufw default deny incoming && ufw default allow outgoing
-#      - name: Allow SSH
-#        - ufw:
-#            rule: limit
-#            port: ssh
-#            proto: tcp
-#      - name: Allow NFS
-#        - ufw:
-#            rule: allow
-#            port: nfs
-#            proto: tcp
-## Commented out for Local Testing will test in DO before Deployment
-##            interface: eth1
-#      - name: Enable UFW
-#        shell: ufw enable
+# Configure Firewall (UFW)
+  - name: Configure UFW
+    hosts: localhost
+    tasks:
+      - name: Set Default Profiles
+        shell: ufw default deny incoming && ufw default allow outgoing
+      - name: Allow SSH
+        - ufw:
+            rule: limit
+            port: ssh
+            proto: tcp
+      - name: Allow NFS
+        - ufw:
+            rule: allow
+            port: nfs
+            proto: tcp
+# Commented out for Local Testing will test in DO before Deployment
+#            interface: eth1
+      - name: Enable UFW
+        shell: ufw enable
 #
 ##These Services are responsible for the sync of files between the Cloud Server and the Local Server (OpenVPN&PiHole to Slave1)  
 #  - name: Set up Systemd Timers and services
