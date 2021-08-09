@@ -64,9 +64,9 @@
     tasks:
       - name: FileSync Service
         copy:
-          src: $PWD/Systemd Timer/FileSync.service
+          remote_src: $PWD/Systemd Timer/FileSync.service
           dest: /etc/systemd/system
       - name: Playlist_Sync Timer
         copy:
-          src: $PWD/Systemd Timer/FileSync.timer
+          remote_src: $PWD/Systemd Timer/FileSync.timer
           dest: /etc/systemd/system
