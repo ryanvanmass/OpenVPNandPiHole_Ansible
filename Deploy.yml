@@ -29,7 +29,7 @@
           state: directory
           mode: 0777
       - name: Create NFS Export Entry for Podcast Sync
-        shell: echo "/media/FileSync {{NFS_Network}}(rw,sync,no_root_squash)" >> /etc/exports.d/cockpit-file-sharing.exports
+        shell: echo "/media/FileSync {{NFS_Network}}(rw,sync,no_root_squash)" >> /etc/exports
       - name: Restart NFS Service
         systemd:
           name: nfs-server
