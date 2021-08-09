@@ -1,18 +1,11 @@
 ---
-  - name: Install Basic Packages
-    hosts: localhost
-    tasks:
-      - name: Wget
-        apt:
-          name: wget
-          state: latest
   - name: Downloading Scripts for Setting up OpenVPN and PiHole
     hosts: localhost
     tasks:
       - name: OpenVPN
         git:
           repo: https://github.com/Nyr/openvpn-install
-          dest: /root/
+          dest: /root/OpenVPN
       - name: PiHole
         get_url:
           url: https://raw.githubusercontent.com/pi-hole/pi-hole/master/automated%20install/basic-install.sh 
