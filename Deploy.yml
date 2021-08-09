@@ -58,15 +58,15 @@
         ufw:
           state: enabled
 
-#These Services are responsible for the sync of files between the Cloud Server and the Local Server (OpenVPN&PiHole to Slave1)  
+#These Services are responsible for the sync of files between the Cloud Server and the Local Server (Cloud to Local Server)  
   - name: Set up Systemd Timers and services
     hosts: localhost
     tasks:
       - name: FileSync Service
         copy:
-          remote_src: $PWD/Systemd Timer/FileSync.service
+          remote_src: /root/OpenVPNandPiHole_Ansible/Systemd Timer/FileSync.service
           dest: /etc/systemd/system
       - name: Playlist_Sync Timer
         copy:
-          remote_src: $PWD/Systemd Timer/FileSync.timer
+          remote_src: /root/OpenVPNandPiHole_Ansible/Systemd Timer/FileSync.timer
           dest: /etc/systemd/system
