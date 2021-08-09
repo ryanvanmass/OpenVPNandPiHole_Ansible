@@ -63,6 +63,6 @@
     hosts: localhost
     tasks:
       - name: FileSync Service
-        shell: cp $PWD/Systemd Timer/FileSync.service /etc/systemd/system
+        shell: cp $PWD/'Systemd Timer'/FileSync.service /etc/systemd/system
       - name: Playlist_Sync Timer
-        shell: cp $PWD/Systemd Timer/FileSync.timer /etc/systemd/system
+        shell: cp $PWD/'Systemd Timer'/FileSync.timer /etc/systemd/system
