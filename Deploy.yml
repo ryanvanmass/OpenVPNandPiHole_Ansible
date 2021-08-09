@@ -7,9 +7,10 @@
           repo: https://github.com/Nyr/openvpn-install
           dest: /root/OpenVPN
       - name: PiHole
-        get_url:
-          url: https://raw.githubusercontent.com/pi-hole/pi-hole/master/automated%20install/basic-install.sh 
-          dest: /root/
+        git:
+          repo: https://github.com/pi-hole/pi-hole.git
+          dest: /root/PiHole
+          depth: 1
       
 #This NFS Share is used to acted as a bridge between my cloud and Local infrastructure
   - name: Configure NFS
