@@ -53,19 +53,20 @@
           port: nfs
           proto: tcp
 # Commented out for Local Testing will test in DO before Deployment
-#            interface: eth1
+#          interface: eth1
       - name: Enable UFW
-        shell: ufw enable
-#
-##These Services are responsible for the sync of files between the Cloud Server and the Local Server (OpenVPN&PiHole to Slave1)  
-#  - name: Set up Systemd Timers and services
-#    hosts: localhost
-#    tasks:
-#      - name: FileSync Service
-#        copy:
-#          src: /root/Playbooks/App Deployment/OpenVPN&PiHole/Systemd Timer/FileSync.service
-#          dest: /etc/systemd/system
-#      - name: Playlist_Sync Timer
-#        copy:
-#          src: /root/Playbooks/App Deployment/OpenVPN&PiHole/Systemd Timer/FileSync.timer
-#          dest: /etc/systemd/system
+        ufw:
+          state: enabled
+
+#These Services are responsible for the sync of files between the Cloud Server and the Local Server (OpenVPN&PiHole to Slave1)  
+  - name: Set up Systemd Timers and services
+    hosts: localhost
+    tasks:
+      - name: FileSync Service
+        copy:
+          src: $PWD/Systemd Timer/FileSync.service
+          dest: /etc/systemd/system
+      - name: Playlist_Sync Timer
+        copy:
+          src: $PWD/Systemd Timer/FileSync.timer
+          dest: /etc/systemd/system
