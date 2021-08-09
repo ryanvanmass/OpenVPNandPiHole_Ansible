@@ -63,12 +63,6 @@
     hosts: localhost
     tasks:
       - name: FileSync Service
-        copy:
-          src: Systemd Timer/FileSync.service
-          dest: /etc/systemd/system
-          delegate_to: localhost
+        shell: cp $PWD/Systemd Timer/FileSync.service /etc/systemd/system
       - name: Playlist_Sync Timer
-        copy:
-          src: Systemd Timer/FileSync.timer
-          dest: /etc/systemd/system
-          delegate_to: localhost
+        shell: cp $PWD/Systemd Timer/FileSync.timer /etc/systemd/system
