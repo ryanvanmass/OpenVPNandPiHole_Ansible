@@ -43,15 +43,15 @@
       - name: Set Default Profiles
         shell: ufw default deny incoming && ufw default allow outgoing
       - name: Allow SSH
-          ufw:
-            rule: limit
-            port: ssh
-            proto: tcp
+        ufw:
+          rule: limit
+          port: ssh
+          proto: tcp
       - name: Allow NFS
-          ufw:
-            rule: allow
-            port: nfs
-            proto: tcp
+        ufw:
+          rule: allow
+          port: nfs
+          proto: tcp
 # Commented out for Local Testing will test in DO before Deployment
 #            interface: eth1
       - name: Enable UFW
