@@ -1,4 +1,11 @@
 ---
+  - name: Install Basic Packages
+    hosts: localhost
+    tasks:
+      - name: Wget
+        apt:
+          name: wget
+          state: latest
   - name: Downloading Scripts for Setting up OpenVPN and PiHole
     hosts: localhost
     tasks:
@@ -12,8 +19,10 @@
 #This NFS Share is used to acted as a bridge between my cloud and Local infrastructure
   - name: Configure NFS
     hosts: localhost
-    vars:
-      NFS_Network: 0.0.0.0
+    vars_prompt:
+      - name: NFS_Network
+        prompt: What is the Network address for the NFS Share?
+        private: no
     tasks:
       - name: Install NFS-Utils
         apt:
