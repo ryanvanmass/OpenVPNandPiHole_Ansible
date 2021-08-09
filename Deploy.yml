@@ -9,37 +9,32 @@
           url: https://raw.githubusercontent.com/pi-hole/pi-hole/master/automated%20install/basic-install.sh 
           dest: /root/
       
-      - name: Set SELinux Policy
-        selinux:
-          policy: targeted
-          state: permissive
-
-##This NFS Share is used to acted as a bridge between my cloud and Local infrastructure
-#  - name: Configure NFS
-#    hosts: localhost
-#    vars_prompt:
-#      - name: NFS_Network
-#        prompt: What is the Network address for the NFS Share?
-#        private: no
-#    tasks:
-#      - name: Install NFS-Utils
-#        apt:
-#          name: nfs-kernel-server
-#          state: latest
-## Create File Share          
-#      - name: Create File Sync Mount Point
-#        file:
-#          path: /media/FileSync
-#          state: directory
-#          mode: 0777
-#      - name: Create NFS Export Entry for Podcast Sync
-#        shell: echo "/media/FileSync {{NFS_Network}}(rw,sync,no_root_squash)" >> /etc/exports.d/cockpit-file-sharing.exports
-#      - name: Restart NFS Service
-#        systemd:
-#          name: nfs-server
-#          state: restarted
-#          daemon_reload: yes
-#          enabled: yes
+#This NFS Share is used to acted as a bridge between my cloud and Local infrastructure
+  - name: Configure NFS
+    hosts: localhost
+    vars_prompt:
+      - name: NFS_Network
+        prompt: What is the Network address for the NFS Share?
+        private: no
+    tasks:
+      - name: Install NFS-Utils
+        apt:
+          name: nfs-kernel-server
+          state: latest
+# Create File Share          
+      - name: Create File Sync Mount Point
+        file:
+          path: /media/FileSync
+          state: directory
+          mode: 0777
+      - name: Create NFS Export Entry for Podcast Sync
+        shell: echo "/media/FileSync {{NFS_Network}}(rw,sync,no_root_squash)" >> /etc/exports.d/cockpit-file-sharing.exports
+      - name: Restart NFS Service
+        systemd:
+          name: nfs-server
+          state: restarted
+          daemon_reload: yes
+          enabled: yes
 ## Configure Firewall (UFW)
 #  - name: Configure UFW
 #    hosts: localhost
