@@ -64,11 +64,11 @@
     tasks:
       - name: FileSync Service
         copy:
-          src: $PWD/Systemd Timer/FileSync.service
+          src: Systemd Timer/FileSync.service
           dest: /etc/systemd/system
           delegate_to: localhost
       - name: Playlist_Sync Timer
         copy:
-          src: $PWD/Systemd Timer/FileSync.timer
+          src: Systemd Timer/FileSync.timer
           dest: /etc/systemd/system
           delegate_to: localhost
