@@ -31,7 +31,7 @@ Run the DeathStar Ansible Playbook
 Guide: https://docs.pi-hole.net/guides/vpn/installation/
 1. Execute Setup Script
 ```
-sh /root/openvpn-install.sh
+sh /root/OpenVPN/openvpn-install.sh
 ```
 2. Select UDP
 3. Use Port 1194
@@ -43,7 +43,7 @@ sh /root/openvpn-install.sh
 2. Run the following `touch /etc/sysconfig/network-scripts/ifcfg-tun0`
 3. Download and Execute Setup Script
 ```
-curl -sSL https://install.pi-hole.net | PIHOLE_SKIP_OS_CHECK=true sudo -E bash
+sh /root/PiHole/automated\ install/basic-install.sh
 ```
 4. select tun0
 5. Select Google
@@ -61,5 +61,5 @@ push "dhcp-option DNS 10.8.0.1"
 ```
 14. Login to web portal and change password
 
-### File_Sync
+### FileSync
 Is a pre-configured Service that can be used as a template for syncing content between a NAS on your Local Network and your cloud deployment
