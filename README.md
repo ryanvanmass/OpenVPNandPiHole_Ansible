@@ -1,37 +1,26 @@
-## System Requirements
-**OS:** Ubuntu
+# Description
+Easily Deploy a Openvpn Network with DNS level ad blocking via PiHole
 
-**VPS:** DigitalOcean
+# UFW Configuration
+| Port | State           | Purpose |
+|------|-----------------|---------|
+| 22   | Limited         | SSH     |
+| 2049 | Allowed on Eth1 | NFS     |
+| 1194 | Allowed         | OpenVPN |
 
-### Services
-* OpenVPN
-* PiHole
-* NFS
 
-## Setup
-### Ansible
-1. Install Ansible
+# Setup
+## Ansible Playbook
 ```
     apt install ansible
-```
-2. Generate SSH Keys
-```
-    ssh-keygen
-```
-3. Copy Ansible Server Public key to `~/.ssh/authorized_keys` file on destination servers
-4. Add Destination Servers ip to `/etc/ansible/hosts`
-
-### Playbook
-Run the DeathStar Ansible Playbook
-```
-    ansible-playbook Deploy.yml
+    ansible-pull -U https://github.com/ryananmass/OpenVPNandPiHole_Ansible Deploy.yml
 ```
 
-### OpenVPN
+## OpenVPN
 Guide: https://docs.pi-hole.net/guides/vpn/installation/
 1. Execute Setup Script
 ```
-sh /root/OpenVPN/openvpn-install.sh
+sh /root/openvpn-install/openvpn-install.sh
 ```
 2. Select UDP
 3. Use Port 1194
@@ -39,27 +28,25 @@ sh /root/OpenVPN/openvpn-install.sh
 5. name the first client the hostname of the server
 
 ### Pihole
-1. reboot for configuration change to take effect
-2. Run the following `touch /etc/sysconfig/network-scripts/ifcfg-tun0`
-3. Download and Execute Setup Script
+1. Run the Install Script
 ```
 sh /root/PiHole/automated\ install/basic-install.sh
 ```
-4. select tun0
-5. Select Google
-6. accept defualt
-7. accept Defualt
-8. set the IP address as 10.8.0.1 and the gateway to be the public ip of the server
+2. select tun0
+3. Select Google
+4. accept defualt
+5. accept Defualt
+6. set the IP address as 10.8.0.1 and the gateway to be the public ip of the server
+7. Accept Defaults
+8. Accept Defaults
 9. Accept Defaults
 10. Accept Defaults
-11. Accept Defaults
-12. Accept Defaults
-13. edit `/etc/openvpn/server/server.conf`to reflect the following
+11. edit `/etc/openvpn/server/server.conf`to reflect the following
 ```
 push "dhcp-option DNS 10.8.0.1"
 #push "dhcp-option DNS 8.8.8.8"
 ```
-14. Login to web portal and change password
+12. Login to web portal and change password
 
 ### FileSync
 Is a pre-configured Service that can be used as a template for syncing content between a NAS on your Local Network and your cloud deployment
